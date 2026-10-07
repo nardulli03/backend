@@ -6,7 +6,6 @@ Son tests COMPLETOS que pasan. Fijate en cada uno las tres fases AAA
 
 from app.password import is_strong, validate_password
 
-
 def test_validate_password_devuelve_vacio_si_es_valida():
     # Arrange
     password = "Supersecreta1"
@@ -37,3 +36,20 @@ def test_is_strong_true_cuando_no_hay_errores():
 
 def test_is_strong_false_cuando_hay_errores():
     assert is_strong("corta") is False
+
+"""Verificar los 3 requisitos incumplidos de una contraseña vacía."""  
+ 
+def test_validate_password_vacia():
+    errores = validate_password("")
+
+    assert len(errores) == 3
+    assert "muy corta (mínimo 8 caracteres)" in errores
+    assert "falta una mayúscula" in errores
+    assert "falta un número" in errores
+
+"""Verificar que una contraseña con solo números detecta la falta de mayúscula."""
+
+def test_validate_password_solo_numeros():
+    errores = validate_password("12345678")
+    assert len(errores) == 1
+    assert "falta una mayúscula" in errores

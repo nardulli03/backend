@@ -19,6 +19,7 @@ def validate_password(password: str) -> list[str]:
     if not any(c.isdigit() for c in password):
         errors.append("falta un número")
 
+
     return errors
 
 

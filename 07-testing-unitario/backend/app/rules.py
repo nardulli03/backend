@@ -9,7 +9,6 @@ Son las mismas reglas que viste en el módulo 06 (autorización RBAC),
 sacadas del framework para que puedas testearlas aisladas.
 """
 
-
 def scope_allows_write(scope: str) -> bool:
     """True si el scope del token incluye "write".
 
@@ -39,4 +38,7 @@ def can_edit(owner_id: int, user_id: int, role: str) -> bool:
     object-level access control: el dueño siempre puede sobre lo suyo;
     un admin puede sobre cualquier documento de su empresa.
     """
+    return owner_id == user_id or role == "admin"
+
+def can_publish(owner_id: int, user_id: int, role: str) -> bool:
     return owner_id == user_id or role == "admin"
